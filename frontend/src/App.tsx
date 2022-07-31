@@ -19,7 +19,6 @@ import NotFound from "components/NotFound";
 
 const App: React.FC = () => {
   const currentUser = useSelector(authSelectors.currentUser);
-  console.log(localStorage.getItem("token"));
 
   return (
     <Router>

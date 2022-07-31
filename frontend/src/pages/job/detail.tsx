@@ -40,7 +40,6 @@ export default function JobDetail() {
   const dispatch = useAppDispatch();
   const allbids = useSelector(bidSelectors.allBidsOnJob);
   const bid = useSelector(bidSelectors.bid);
-  console.log("bid", bid);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [bidid, setBidId] = useState(0);
 
@@ -49,7 +48,6 @@ export default function JobDetail() {
 
   const onOpenModal = (id: number | undefined) => {
     if (id) {
-      console.log("id", id);
       setBidId(id);
       onOpen();
     }
