@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PROD_DATABASE_URL")
+}
+
+//model
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  password String
+  email String @unique
+  role Role
+  title String
+  description String
+  rate Float
+  isApproved Boolean @default(false)
+  writtenJob Job[] @relation("writtenJob")
+  writtenBid Bids[] @relation("writtenBid")
+}
+
+model Job {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  rate Float
+  author User @relation("writtenJob", fields: [authorId], references: [id])
+  authorId Int
+  postedBid Bids[]
+  status Status @default(active)
+  isApproved Boolean @default(false)
+}
+
+model Bids {
+  id Int @id @default(autoincrement())
+  content String
+  rate Float
+  job Job @relation(fields: [jobId], references: [id])
+  jobId Int
+  author User @relation("writtenBid", fields: [authorId], references: [id])
+  authorId Int
+}
+
+// model ApplyReq {
+//   job Job? @relation(fields: [jobID], references: [id])
+//   jobID Int?
+//   client User? @relation(fields: [clientID], references: [id])
+//   clientID Int?
+// }
+
+//enum
+enum Status {
+  active
+  posted
+}
+
+enum Role {
+  admin
+  client
+  freelancer
+}
