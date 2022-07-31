@@ -11,7 +11,6 @@ import {
   getUserAction,
 } from "./user.action";
 
-// define a user state type
 type UserState = {
   allUsers: UserObject[];
   user?: UserObject;
@@ -26,7 +25,6 @@ const initialState: UserState = {
   approvedUsers: [],
 };
 
-// define userslice and reducers
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -105,7 +103,6 @@ const user = (state: RootState) => state.user.user;
 const approvedUsers = (state: RootState) => state.user.approvedUsers;
 const loading = (state: RootState) => state.user.loading;
 
-// define user selectors
 export const userSelectors = {
   allUsers,
   user,

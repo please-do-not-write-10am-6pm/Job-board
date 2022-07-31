@@ -75,7 +75,6 @@ export default function JobDetail() {
         width={"full"}
       >
         <Button
-          /* flex={1} */
           px={4}
           mt={"4"}
           ml={"4"}
@@ -201,7 +200,6 @@ export default function JobDetail() {
                     }}
                     type="text"
                     name="content"
-                    // ref={initialRef}
                     placeholder="Here is a content"
                   />
                   <ErrorMessage className="errorMsg" name="content" />

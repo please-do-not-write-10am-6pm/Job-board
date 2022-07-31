@@ -70,7 +70,6 @@ export default function App() {
     <BasicLayout>
       {currentUser.role !== "freelancer" && (
         <Button
-          /* flex={1} */
           px={4}
           mt={"4"}
           ml={"4"}
@@ -97,7 +96,6 @@ export default function App() {
         return (
           <Flex
             key={num}
-            // bg="#edf3f8"
             _dark={{ bg: "#3e3e3e" }}
             pt={1}
             w="full"

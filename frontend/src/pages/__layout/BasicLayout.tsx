@@ -13,7 +13,7 @@ export const BasicLayout = ({ children }: any) => {
           {children}
         </Stack>
       </Stack>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

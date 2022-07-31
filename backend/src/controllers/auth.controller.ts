@@ -1,4 +1,4 @@
-import e, { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import createHttpError from "http-errors";
 import { hash, compare } from "bcryptjs";
 
@@ -64,10 +64,7 @@ export const signIn = async (
     });
 
     if (!user || !(await compare(req.body.password, user.password))) {
-      res.status(400).send({
-        message: "hello",
-      });
-      // throw createHttpError(400, "Email or password do not match");
+      throw createHttpError(400, "Email or password do not match");
     }
 
     const token = await generateToken(

@@ -139,7 +139,7 @@ export const update = async (
         rate: parseInt(rate),
         ...bidInfo,
       },
-    }); // don't return a bid!
+    });
 
     const updatedBid = await prisma.bids.findFirst({
       where: {
@@ -147,7 +147,7 @@ export const update = async (
         authorId: +req.user.id,
         jobId: +req.params.jobId,
       },
-    }); // get a bid
+    });
 
     res.status(201).send({
       status: "Success",

@@ -77,7 +77,7 @@ describe("signIn a User", () => {
     await request.post("/api/signUp").send(users[5]).expect(400);
   });
   test("should return 400 with an invalid password", async () => {
-    const res = await request.post("/api/signUp").send(users[3]).expect(400);
+    await request.post("/api/signUp").send(users[3]).expect(400);
   });
 
   afterAll(async () => {

@@ -1,4 +1,3 @@
-import { hash } from "bcryptjs";
 import supertest from "supertest";
 
 import app from "../../app";
@@ -23,7 +22,7 @@ describe("CRUD a User", () => {
     expect(Object.keys(res.body).length).toBe(0);
   });
 
-  //   afterAll(async () => {
-  //     await prisma.user.deleteMany({});
-  //   });
+  afterAll(async () => {
+    await prisma.user.deleteMany({});
+  });
 });

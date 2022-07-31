@@ -48,14 +48,8 @@ model Bids {
   authorId Int
 }
 
-// model ApplyReq {
-//   job Job? @relation(fields: [jobID], references: [id])
-//   jobID Int?
-//   client User? @relation(fields: [clientID], references: [id])
-//   clientID Int?
-// }
-
 //enum
+
 enum Status {
   active
   posted

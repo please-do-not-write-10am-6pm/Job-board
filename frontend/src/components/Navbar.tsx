@@ -105,7 +105,6 @@ export default function WithSubnavigation() {
                 fontWeight={600}
                 color={"white"}
                 bg={"pink.400"}
-                // variant={"link"}
                 _hover={{
                   bg: "pink.300",
                 }}

@@ -33,12 +33,6 @@ const RegisterSchema = Yup.object().shape({
       "Password must contain at least 8 characters plus 1 alphabet, 1 special character and 1 number"
     )
     .required("Required"),
-  // confirmPassword: Yup.string()
-  //   .matches(
-  //     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-  //     "Password must contain at least 8 characters plus 1 alphabet, 1 special character and 1 number"
-  //   )
-  //   .required("Required"),
   role: Yup.string().required("Required"),
   title: Yup.string()
     .max(100, "Must be 100 characters or less")
@@ -61,7 +55,6 @@ export default function Register() {
           name: "",
           email: "",
           password: "",
-          // confirmPassword: "",
           role: "",
           title: "",
           description: "",
@@ -153,30 +146,6 @@ export default function Register() {
                     </InputRightElement>
                   </InputGroup>
                   <ErrorMessage name="password" />
-                  {/* <FormLabel>ConfirmPassword</FormLabel>
-                <InputGroup>
-                  <Field
-                    style={{
-                      width: "100%",
-                      borderWidth: "thin",
-                      borderRadius: "5px",
-                      padding: "8px",
-                    }}
-                    name="confirmPassword"
-                    type={showPassword ? "text" : "password"}
-                  />
-                  <InputRightElement h={"full"}>
-                    <Button
-                      variant={"ghost"}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }
-                    >
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-                <ErrorMessage name="confirmPassword" /> */}
                   <FormLabel>Role</FormLabel>
                   <Field
                     style={{

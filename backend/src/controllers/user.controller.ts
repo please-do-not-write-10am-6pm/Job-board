@@ -162,12 +162,12 @@ export const remove = async (
 ) => {
   try {
     if (req.user.role === "admin") {
-      // const user = await prisma.user.findUnique({
-      //   where: {
-      //     id: +req.params.id,
-      //   },
-      // });
-      // if (!user) throw createHttpError(404, "User not found");
+      const user = await prisma.user.findUnique({
+        where: {
+          id: +req.params.id,
+        },
+      });
+      if (!user) throw createHttpError(404, "User not found");
 
       const deleteUser = await prisma.user.delete({
         where: {

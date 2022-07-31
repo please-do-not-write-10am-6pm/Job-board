@@ -92,6 +92,5 @@ export const authValidation = async (
       next(error);
     }
   }
-
   next();
 };
