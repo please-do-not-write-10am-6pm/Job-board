@@ -59,7 +59,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    localStorage.getItem("token") && dispatch(getAllJobsAction());
+    dispatch(getAllJobsAction());
   }, [dispatch]);
 
   const handleApproveJob = (id: number | undefined) => {

@@ -54,6 +54,7 @@ export default function JobForm() {
 
   return (
     <Formik
+      enableReinitialize
       initialValues={{
         title: id ? job.title : "",
         description: id ? job.description : "",
@@ -98,7 +99,7 @@ export default function JobForm() {
           <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
             <Stack align={"center"}>
               <Heading fontSize={"4xl"} textAlign={"center"}>
-                Create a Job!
+                Enjoy a Job!
               </Heading>
               <Text fontSize={"lg"} color={"gray.600"}>
                 to enjoy all of our cool features ✌️
