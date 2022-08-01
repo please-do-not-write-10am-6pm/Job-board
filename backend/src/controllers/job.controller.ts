@@ -23,6 +23,9 @@ export const getAll = async (
             },
           },
         },
+        orderBy: {
+          id: "desc",
+        },
       });
     }
 
@@ -39,6 +42,9 @@ export const getAll = async (
             },
           },
         },
+        orderBy: {
+          id: "desc",
+        },
       });
     }
 
@@ -54,6 +60,9 @@ export const getAll = async (
               name: true,
             },
           },
+        },
+        orderBy: {
+          id: "desc",
         },
       });
     }
@@ -202,6 +211,49 @@ export const remove = async (
     res.status(204).send({
       status: "Success",
       payload: deleteJob,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const approveJob = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const job = await prisma.job.update({
+      where: { id: +req.params.id },
+      data: { isApproved: true },
+    });
+    if (!job) throw createHttpError(404, "Job not found");
+
+    res.status(200).send({
+      status: "Success",
+      payload: job,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const blockJob = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const job = await prisma.job.update({
+      where: { id: +req.params.id },
+      data: { isApproved: false },
+    });
+
+    if (!job) throw createHttpError(404, "Job not found");
+
+    res.status(200).send({
+      status: "Success",
+      payload: job,
     });
   } catch (error) {
     next(error);

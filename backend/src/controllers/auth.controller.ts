@@ -84,95 +84,12 @@ export const signIn = async (
   }
 };
 
-export const approveUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const user = await prisma.user.update({
-      where: { id: +req.params.id },
-      data: { isApproved: true },
-    });
-
-    if (!user) throw createHttpError(404, "User not found");
-
-    res.status(200).send({
-      status: "Success",
-      payload: user,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const blockUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const user = await prisma.user.update({
-      where: { id: +req.params.id },
-      data: { isApproved: false },
-    });
-
-    if (!user) throw createHttpError(404, "User not found");
-
-    res.status(200).send({
-      status: "Success",
-      payload: user,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const approveJob = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const job = await prisma.job.update({
-      where: { id: +req.params.id },
-      data: { isApproved: true },
-    });
-    if (!job) throw createHttpError(404, "Job not found");
-
-    res.status(200).send({
-      status: "Success",
-      payload: job,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const blockJob = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const job = await prisma.job.update({
-      where: { id: +req.params.id },
-      data: { isApproved: false },
-    });
-
-    if (!job) throw createHttpError(404, "Job not found");
-  } catch (error) {
-    next(error);
-  }
-};
-
 export const getProfileById = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    console.log(req.user);
     const user = await prisma.user.findUnique({
       where: {
         id: +req.user.id,

@@ -23,6 +23,9 @@ export const getAllOnEachjob = async (
             },
           },
         },
+        orderBy: {
+          id: "asc",
+        },
       });
     } else if (req.user.role === "client") {
       bids = await prisma.bids.findMany({
@@ -36,6 +39,9 @@ export const getAllOnEachjob = async (
               email: true,
             },
           },
+        },
+        orderBy: {
+          id: "asc",
         },
       });
     } else {
@@ -51,6 +57,9 @@ export const getAllOnEachjob = async (
               email: true,
             },
           },
+        },
+        orderBy: {
+          id: "asc",
         },
       });
     }

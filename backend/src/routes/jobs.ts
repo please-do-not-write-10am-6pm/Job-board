@@ -5,8 +5,14 @@ import {
   update,
   show,
   remove,
+  approveJob,
+  blockJob,
 } from "../controllers/job.controller";
-import { PeopleWhoCanSeeFreelancer } from "../middleware/validator";
+import {
+  PeopleWhoCanSeeFreelancer,
+  authValidation,
+  isAdmin,
+} from "../middleware/validator";
 
 const jobRouter = Router();
 
@@ -15,5 +21,8 @@ jobRouter.get("/:id", show);
 jobRouter.post("/", PeopleWhoCanSeeFreelancer, create);
 jobRouter.patch("/:id", PeopleWhoCanSeeFreelancer, update);
 jobRouter.delete("/:id", PeopleWhoCanSeeFreelancer, remove);
+
+jobRouter.patch("/:id/approve", authValidation, isAdmin, approveJob);
+jobRouter.patch("/:id/block", authValidation, isAdmin, blockJob);
 
 export default jobRouter;

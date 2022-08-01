@@ -160,7 +160,7 @@ export default function UserPage() {
                         {x}
                       </Td>
                       <Td
-                        bg={user.isApproved ? "gray.300" : ""}
+                        bg={user.isApproved ? "" : "gray.300"}
                         color={"gray.800"}
                         fontSize="md"
                         fontWeight="hairline"
@@ -189,21 +189,21 @@ export default function UserPage() {
                 >
                   Actions
                 </Td>
-                <Td bg={user.isApproved ? "gray.300" : ""}>
+                <Td bg={user.isApproved ? "" : "gray.300"}>
                   <ButtonGroup variant="solid" size="sm" spacing={3}>
                     {user.isApproved ? (
                       <IconButton
                         colorScheme="gray"
                         icon={<NotAllowedIcon />}
                         aria-label="Edit"
-                        onClick={() => handleApproveUser(user.id)}
+                        onClick={() => handleBlockUser(user.id)}
                       />
                     ) : (
                       <IconButton
                         colorScheme="green"
                         icon={<CheckIcon />}
                         aria-label="Edit"
-                        onClick={() => handleBlockUser(user.id)}
+                        onClick={() => handleApproveUser(user.id)}
                       />
                     )}
                   </ButtonGroup>

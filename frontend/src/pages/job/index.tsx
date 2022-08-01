@@ -148,12 +148,12 @@ export default function App() {
             justifyContent="center"
           >
             <Box
+              bg={job.isApproved ? "" : "gray.300"}
               mx="auto"
               px={8}
               py={4}
               rounded="lg"
               shadow="lg"
-              bg="white"
               _dark={{ bg: "gray.800" }}
               minW="80%"
             >
@@ -190,13 +190,13 @@ export default function App() {
                     onClick={() => onOpenModal(job.id)}
                   />
                 )}
-                {!job.isApproved ? (
+                {job.isApproved ? (
                   <IconButton
                     colorScheme="gray"
                     ml={3}
                     icon={<NotAllowedIcon />}
                     aria-label="Edit"
-                    onClick={() => handleApproveJob(job.id)}
+                    onClick={() => handleBlockJob(job.id)}
                   />
                 ) : (
                   <IconButton
@@ -204,7 +204,7 @@ export default function App() {
                     ml={3}
                     icon={<CheckIcon />}
                     aria-label="Edit"
-                    onClick={() => handleBlockJob(job.id)}
+                    onClick={() => handleApproveJob(job.id)}
                   />
                 )}
               </Flex>

@@ -72,7 +72,6 @@ export const isApprovedUser = (
   res: Response,
   next: NextFunction
 ): void => {
-  console.log(req.user.isApproved, "isApproved");
   req.user.isApproved === true
     ? next()
     : res.status(403).send("Access Forbidden");
