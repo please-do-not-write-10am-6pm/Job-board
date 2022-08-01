@@ -6,4 +6,5 @@ export interface JobObject {
   status?: string;
   authorId?: number;
   author: { name: string };
+  isApproved: boolean;
 }

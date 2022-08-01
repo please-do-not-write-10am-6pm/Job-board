@@ -47,7 +47,6 @@ export default function JobForm() {
   };
 
   useEffect(() => {
-    console.log("id", id);
     if (id) {
       dispatch(getJobAction(parseInt(id)));
     }

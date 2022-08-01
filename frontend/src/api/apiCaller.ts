@@ -24,15 +24,15 @@ export const login = (data: object) =>
 
 // approve user
 export const approveUser = (id: number) =>
-  axios.patch(`${BaseUrl}/api/user/approved/${id}`);
+  axios.patch(`${BaseUrl}/api/users/${id}/approve`);
 export const blockUser = (id: number) =>
-  axios.patch(`${BaseUrl}/api/user/block/${id}`);
+  axios.patch(`${BaseUrl}/api/users/${id}/block`);
 
 // approve job
 export const approveJob = (id: number) =>
-  axios.patch(`${BaseUrl}/api/job/approved/${id}`);
+  axios.patch(`${BaseUrl}/api/jobs/${id}/approve`);
 export const blockJob = (id: number) =>
-  axios.patch(`${BaseUrl}/api/job/block/${id}`);
+  axios.patch(`${BaseUrl}/api/jobs/${id}/block`);
 
 // profile api
 export const getProfile = () => axios.get(`${BaseUrl}/api/profile`);

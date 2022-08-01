@@ -24,13 +24,26 @@ const App: React.FC = () => {
   return (
     <Router>
       <BasicLayout>
-        {currentUser.email ? (
+        {!!currentUser.email ? (
           <Routes>
+            <Route path="/login" element={<Navigate replace to="/jobs" />} />
+            <Route path="/register" element={<Navigate replace to="/jobs" />} />
+            <Route path="/" element={<Navigate replace to="/jobs" />} />
             <Route path="/jobs" element={<JobPage />} />
+            <Route
+              path="/users"
+              element={
+                currentUser.role === "admin" ||
+                currentUser.role === "client" ? (
+                  <UserPage />
+                ) : (
+                  <NotFound />
+                )
+              }
+            />
             <Route path="/job/create" element={<JobForm />} />
-            <Route path="/job/:id" element={<JobDetail />} />
             <Route path="/job/:id/edit" element={<JobForm />} />
-            <Route path="/users" element={<UserPage />} />
+            <Route path="/job/:id" element={<JobDetail />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>
         ) : (
@@ -40,80 +53,6 @@ const App: React.FC = () => {
             <Route path="/*" element={<Navigate replace to="/login" />} />
           </Routes>
         )}
-        {/* <Routes> */}
-        {/* <Route
-            path="/login"
-            element={
-              !!currentUser.email ? <Navigate replace to="/jobs" /> : <Login />
-            }
-          />
-          <Route
-            path="/"
-            element={
-              !!currentUser.email ? (
-                <Navigate replace to="/jobs" />
-              ) : (
-                <Register />
-              )
-            }
-          />
-          <Route
-            path="/jobs"
-            element={
-              !!currentUser.email ? (
-                <JobPage />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/users"
-            element={
-              !!currentUser.email ? (
-                currentUser.role === "admin" ||
-                currentUser.role === "client" ? (
-                  <UserPage />
-                ) : (
-                  <NotFound />
-                )
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/job/create"
-            element={
-              !!currentUser.email ? (
-                <JobForm />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/job/update/:id"
-            element={
-              !!currentUser.email ? (
-                <JobForm />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/job/detail/:id"
-            element={
-              !!currentUser.email ? (
-                <JobDetail />
-              ) : (
-                <Navigate replace to="/login" />
-              )
-            }
-          />
-          <Route path="/*" element={<NotFound />} />; */}
-        {/* </Routes> */}
         <ToastContainer />
       </BasicLayout>
     </Router>

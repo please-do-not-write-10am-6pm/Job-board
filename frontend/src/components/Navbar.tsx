@@ -26,17 +26,17 @@ interface NavItem {
   label: string;
   subLabel?: string;
   children?: Array<NavItem>;
-  href?: string;
+  to?: string;
 }
 
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "User",
-    href: "/users",
+    to: "/users",
   },
   {
     label: "Job",
-    href: "/jobs",
+    to: "/jobs",
   },
 ];
 
@@ -100,7 +100,7 @@ export default function WithSubnavigation() {
           {!localStorage.getItem("token") ? (
             <div style={{ display: "flex" }}>
               <Button
-                as={"a"}
+                as={ReactRouterLink}
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"sm"}
                 mx={4}
@@ -110,12 +110,12 @@ export default function WithSubnavigation() {
                 _hover={{
                   bg: "pink.300",
                 }}
-                href={"/login"}
+                to={"/login"}
               >
                 Sign In
               </Button>
               <Button
-                as={"a"}
+                as={ReactRouterLink}
                 display={{ base: "none", md: "inline-flex" }}
                 fontSize={"sm"}
                 fontWeight={600}
@@ -124,7 +124,7 @@ export default function WithSubnavigation() {
                 _hover={{
                   bg: "pink.300",
                 }}
-                href={"/"}
+                to={"/register"}
               >
                 Sign Up
               </Button>
@@ -164,7 +164,7 @@ const DesktopNav = () => {
                   <Link
                     as={ReactRouterLink}
                     p={2}
-                    to={navItem.href ?? "#"}
+                    to={navItem.to ?? "#"}
                     fontSize={"sm"}
                     fontWeight={500}
                     color={linkColor}
@@ -187,7 +187,7 @@ const DesktopNav = () => {
                   <Link
                     as={ReactRouterLink}
                     p={2}
-                    to={navItem.href ?? "#"}
+                    to={navItem.to ?? "#"}
                     fontSize={"sm"}
                     fontWeight={500}
                     color={linkColor}
@@ -227,15 +227,15 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, to }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex
         py={2}
-        as={Link}
-        href={href ?? "#"}
+        as={ReactRouterLink}
+        to={to ?? "#"}
         justify={"space-between"}
         align={"center"}
         _hover={{
@@ -270,7 +270,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         >
           {children &&
             children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
+              <Link as={ReactRouterLink} key={child.label} py={2} to={"#"}>
                 {child.label}
               </Link>
             ))}

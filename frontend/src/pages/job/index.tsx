@@ -19,10 +19,19 @@ import {
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useAppDispatch } from "redux/store";
-import { getAllJobsAction } from "redux/slices/jobSlice/job.action";
+import {
+  approveJobAction,
+  blockJobAction,
+  getAllJobsAction,
+} from "redux/slices/jobSlice/job.action";
 import { useSelector } from "react-redux";
 import { jobSelectors } from "redux/slices/jobSlice";
-import { EditIcon, EmailIcon } from "@chakra-ui/icons";
+import {
+  CheckIcon,
+  EditIcon,
+  EmailIcon,
+  NotAllowedIcon,
+} from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { authSelectors } from "redux/slices/authSlice";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -52,6 +61,33 @@ export default function App() {
   useEffect(() => {
     localStorage.getItem("token") && dispatch(getAllJobsAction());
   }, [dispatch]);
+
+  const handleApproveJob = (id: number | undefined) => {
+    id &&
+      dispatch(approveJobAction(id))
+        .unwrap()
+        .then((res) => {
+          toast(res.status);
+          dispatch(getAllJobsAction());
+        })
+        .catch((error) => {
+          toast.warn(error.message);
+        });
+  };
+
+  const handleBlockJob = (id: number | undefined) => {
+    console.log("blockId", id);
+    id &&
+      dispatch(blockJobAction(id))
+        .unwrap()
+        .then((res) => {
+          toast(res.status);
+          dispatch(getAllJobsAction());
+        })
+        .catch((error) => {
+          toast.warn(error.message);
+        });
+  };
 
   const allJobs = useSelector(jobSelectors.allJobs);
 
@@ -152,6 +188,23 @@ export default function App() {
                     icon={<EmailIcon />}
                     aria-label="CreateBId"
                     onClick={() => onOpenModal(job.id)}
+                  />
+                )}
+                {!job.isApproved ? (
+                  <IconButton
+                    colorScheme="gray"
+                    ml={3}
+                    icon={<NotAllowedIcon />}
+                    aria-label="Edit"
+                    onClick={() => handleApproveJob(job.id)}
+                  />
+                ) : (
+                  <IconButton
+                    colorScheme="green"
+                    ml={3}
+                    icon={<CheckIcon />}
+                    aria-label="Edit"
+                    onClick={() => handleBlockJob(job.id)}
                   />
                 )}
               </Flex>

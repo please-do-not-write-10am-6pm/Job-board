@@ -35,8 +35,10 @@ export default function UserPage() {
   const handleApproveUser = (id: number) => {
     dispatch(approveUserAction(id))
       .unwrap()
-      .then((res: any) => {
+      .then((res) => {
         toast(res.status);
+        dispatch(getAllUserAction());
+        console.log("getAllUserAction is done after approved user");
       })
       .catch((error) => {
         toast.warn(error.message);
@@ -46,8 +48,10 @@ export default function UserPage() {
   const handleBlockUser = (id: number) => {
     dispatch(blockUserAction(id))
       .unwrap()
-      .then((res: any) => {
+      .then((res) => {
         toast(res.status);
+        dispatch(getAllUserAction());
+        console.log("getAllUserAction is done after blocked user");
       })
       .catch((error) => {
         toast.warn(error.message);
@@ -189,7 +193,7 @@ export default function UserPage() {
                   <ButtonGroup variant="solid" size="sm" spacing={3}>
                     {user.isApproved ? (
                       <IconButton
-                        colorScheme="green"
+                        colorScheme="gray"
                         icon={<NotAllowedIcon />}
                         aria-label="Edit"
                         onClick={() => handleApproveUser(user.id)}
