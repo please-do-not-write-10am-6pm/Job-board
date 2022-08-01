@@ -39,11 +39,16 @@ export const BidSchema = Yup.object().shape({
 });
 
 export default function App() {
-  const [jobid, setJobId] = useState(0);
+  const [jobid, setJobId] = useState<null | number>(null);
   const dispatch = useAppDispatch();
   const navigator = useNavigate();
   const currentUser = useSelector(authSelectors.currentUser);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onCloseModal = () => {
+    setJobId(null);
+    onClose();
+  };
 
   useEffect(() => {
     localStorage.getItem("token") && dispatch(getAllJobsAction());
@@ -62,10 +67,16 @@ export default function App() {
   const onOpenModal = (id: number | undefined) => {
     if (id) {
       setJobId(id);
-      onOpen();
     }
   };
 
+  useEffect(() => {
+    if (jobid) {
+      onOpen();
+    }
+  }, [jobid, onOpen]);
+
+  console.log("jobindex is rendered");
   return (
     <BasicLayout>
       {currentUser.role !== "freelancer" && (
@@ -221,6 +232,7 @@ export default function App() {
                 .then((res) => {
                   toast(res.status);
                   navigator(`/job/detail/${jobid}`);
+                  onCloseModal();
                 })
                 .catch((error) => {
                   toast.warn(error.message);
@@ -249,7 +261,6 @@ export default function App() {
                   }}
                   type="text"
                   name="content"
-                  // ref={initialRef}
                   placeholder="Here is a content"
                 />
                 <ErrorMessage className="errorMsg" name="content" />
@@ -279,7 +290,7 @@ export default function App() {
                 >
                   Save
                 </Button>
-                <Button onClick={onClose}>Cancel</Button>
+                <Button onClick={onCloseModal}>Cancel</Button>
               </ModalFooter>
             </ModalContent>
           </Form>

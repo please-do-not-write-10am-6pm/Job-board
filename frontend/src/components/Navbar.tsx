@@ -48,6 +48,7 @@ export default function WithSubnavigation() {
     Promise.all([localStorage.removeItem("token"), navigator("/login")]);
   };
 
+  console.log("nabvar is rendered");
   return (
     <Box>
       <Flex

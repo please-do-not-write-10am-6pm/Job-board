@@ -39,9 +39,9 @@ export default function JobDetail() {
   const navigator = useNavigate();
   const dispatch = useAppDispatch();
   const allbids = useSelector(bidSelectors.allBidsOnJob);
-  const bid = useSelector(bidSelectors.bid);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [bidid, setBidId] = useState(0);
+  const [bidid, setBidId] = useState<null | number>(null);
 
   const job = useSelector(jobSelectors.job);
   const { id } = useParams();
@@ -49,9 +49,19 @@ export default function JobDetail() {
   const onOpenModal = (id: number | undefined) => {
     if (id) {
       setBidId(id);
-      onOpen();
     }
   };
+
+  const onCloseModal = () => {
+    setBidId(null);
+    onClose();
+  };
+
+  useEffect(() => {
+    if (bidid) {
+      onOpen();
+    }
+  }, [bidid, onOpen]);
 
   const goBack = () => {
     navigator("/jobs");
@@ -59,11 +69,21 @@ export default function JobDetail() {
 
   useEffect(() => {
     if (id) {
-      dispatch(getAllBidsOnEachJobAction(parseInt(id)));
+      console.log("componentWIllMount");
       dispatch(getJobAction(parseInt(id)));
+      dispatch(getAllBidsOnEachJobAction(parseInt(id)));
+    }
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    console.log("componentOutUpdate");
+    if (id && bidid !== null) {
+      console.log("componentInnerUpdate");
       dispatch(getBidAction({ jobId: parseInt(id), bidId: bidid }));
     }
-  }, [id, bidid]);
+  }, [dispatch, id, bidid]);
+
+  const bid = useSelector(bidSelectors.bid);
 
   return (
     <BasicLayout>
@@ -138,7 +158,6 @@ export default function JobDetail() {
           {allbids.map((cardInfo, index) => (
             <BidCard
               onOpenModal={onOpenModal}
-              key={index}
               id={cardInfo.id}
               author={cardInfo.author}
               rate={cardInfo.rate}
@@ -171,7 +190,7 @@ export default function JobDetail() {
                   .unwrap()
                   .then((res) => {
                     toast(res.status);
-                    onClose();
+                    onCloseModal();
                   })
                   .catch((error) => {
                     toast.warn(error.message);
@@ -229,7 +248,7 @@ export default function JobDetail() {
                   >
                     Update
                   </Button>
-                  <Button onClick={onClose}>Cancel</Button>
+                  <Button onClick={onCloseModal}>Cancel</Button>
                 </ModalFooter>
               </ModalContent>
             </Form>

@@ -17,9 +17,10 @@ interface TestimonialCardProps {
 }
 
 export default function BidCard(props: TestimonialCardProps) {
-  const { author, rate, content, index, onOpenModal, id } = props;
+  const { author, rate, content, onOpenModal, id, index } = props;
   return (
     <Flex
+      key={index}
       boxShadow={"lg"}
       maxW={"640px"}
       direction={{ base: "column-reverse", md: "row" }}
