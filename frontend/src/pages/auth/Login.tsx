@@ -44,6 +44,7 @@ export default function Login() {
             toast(res.status);
             localStorage.setItem("token", res.token);
             navigate("/jobs");
+            console.log("login successful");
           })
           .catch((error) => {
             toast.warn(error.message);

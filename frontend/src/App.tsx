@@ -24,11 +24,10 @@ const App: React.FC = () => {
   return (
     <Router>
       <BasicLayout>
-        {localStorage.getItem("token") ? (
+        {currentUser.email ? (
           <Routes>
             <Route path="/login" element={<Navigate replace to="/jobs" />} />
             <Route path="/register" element={<Navigate replace to="/jobs" />} />
-            <Route path="/" element={<Navigate replace to="/jobs" />} />
             <Route path="/jobs" element={<JobPage />} />
             <Route
               path="/users"

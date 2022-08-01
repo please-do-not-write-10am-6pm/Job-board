@@ -44,6 +44,7 @@ export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
   const navigator = useNavigate();
   const dispatch = useAppDispatch();
+  const currentUser = useSelector(authSelectors.currentUser);
 
   const logout = () => {
     dispatch(setLogout());
@@ -97,7 +98,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          {!localStorage.getItem("token") ? (
+          {!currentUser.email ? (
             <div style={{ display: "flex" }}>
               <Button
                 as={ReactRouterLink}
@@ -148,14 +149,14 @@ const DesktopNav = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    localStorage.getItem("token") && dispatch(getProfileAction());
+    dispatch(getProfileAction());
   }, [dispatch]);
 
   const currentUser = useSelector(authSelectors.currentUser);
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {localStorage.getItem("token") ? (
+      {currentUser.email ? (
         currentUser.role === "admin" || currentUser.role === "client" ? (
           NAV_ITEMS.map((navItem) => (
             <Box key={navItem.label}>
@@ -210,13 +211,15 @@ const DesktopNav = () => {
   );
 };
 const MobileNav = () => {
+  const currentUser = useSelector(authSelectors.currentUser);
+
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       display={{ md: "none" }}
     >
-      {localStorage.getItem("token") ? (
+      {currentUser.email ? (
         NAV_ITEMS.map((navItem) => (
           <MobileNavItem key={navItem.label} {...navItem} />
         ))

@@ -1,0 +1,76 @@
+{
+  "users": [
+    {
+      "name": "Tony James",
+      "email": "tony@double.io",
+      "password": "liverpool!23",
+      "role": "client",
+      "title": "A Full stack enginner",
+      "description": "I am a full stack developer about www",
+      "rate": 120
+    },
+    {
+      "name": "Chronos",
+      "email": "chronos@keyboard.io",
+      "password": "liverpool!23",
+      "role": "client",
+      "title": "A Full stack engineer",
+      "description": "I am a full stack developer about WWW.",
+      "rate": 100
+    },
+    {
+      "name": "Donaldo James",
+      "email": "donaldo3@email.io",
+      "password": "liverpool1@3",
+      "role": "admin",
+      "title": "A senior frontend developer",
+      "description": "I am a frontend developer with 8+ years React",
+      "rate": 250
+    },
+    {
+      "name": "Invalid Password User",
+      "email": "chronos@truelove.com",
+      "password": "liverpool123",
+      "role": "client",
+      "title": "A Full stack engineer",
+      "description": "I am a full stack developer about WWW.",
+      "rate": 100
+    },
+    {
+      "name": "Invalid email User",
+      "email": "chronos",
+      "password": "liverpool!23",
+      "role": "client",
+      "title": "A Full stack engineer",
+      "description": "I am a full stack developer about WWW.",
+      "rate": 100
+    },
+    {
+      "name": "Sun of bitch",
+      "email": "sun@company.com",
+      "password": "liverpool!23",
+      "role": "admin",
+      "title": "A senior frontend developer",
+      "description": "I am a frontend developer with 8+ years React",
+      "rate": 400
+    },
+    {
+      "name": "Sun of bitch",
+      "email": "sun@",
+      "password": "liverpool!23",
+      "role": "admin",
+      "title": "A senior frontend developer",
+      "description": "I am a frontend developer with 8+ years React",
+      "rate": 400
+    },
+    {
+      "name": "Sun of bitch",
+      "email": "sun@company.com",
+      "password": "liverpool",
+      "role": "admin",
+      "title": "A senior frontend developer",
+      "description": "I am a frontend developer with 8+ years React",
+      "rate": 400
+    }
+  ]
+}

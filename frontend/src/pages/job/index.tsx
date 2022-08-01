@@ -186,7 +186,7 @@ export default function App() {
                     _hover={{ bg: "gray.500" }}
                     colorScheme="green"
                     icon={<EmailIcon />}
-                    aria-label="CreateBId"
+                    aria-label="CreateBid"
                     onClick={() => onOpenModal(job.id)}
                   />
                 )}
@@ -195,7 +195,7 @@ export default function App() {
                     colorScheme="gray"
                     ml={3}
                     icon={<NotAllowedIcon />}
-                    aria-label="Edit"
+                    aria-label="Approve"
                     onClick={() => handleBlockJob(job.id)}
                   />
                 ) : (
@@ -203,7 +203,7 @@ export default function App() {
                     colorScheme="green"
                     ml={3}
                     icon={<CheckIcon />}
-                    aria-label="Edit"
+                    aria-label="Block"
                     onClick={() => handleApproveJob(job.id)}
                   />
                 )}
