@@ -16,9 +16,8 @@ import {
   ModalBody,
   FormLabel,
   ModalFooter,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import { BasicLayout } from "pages/__layout/BasicLayout";
+import { Link as ReactRouterLink } from "react-router-dom";
 import { useAppDispatch } from "redux/store";
 import { getAllJobsAction } from "redux/slices/jobSlice/job.action";
 import { useSelector } from "react-redux";
@@ -60,8 +59,8 @@ export default function App() {
     navigator("/job/create");
   };
 
-  const goEditJobPage = (id: any) => {
-    navigator(`/job/update/${id}`);
+  const goEditJobPage = (id: number | undefined) => {
+    navigator(`/job/${id}/edit`);
   };
 
   const onOpenModal = (id: number | undefined) => {
@@ -76,9 +75,8 @@ export default function App() {
     }
   }, [jobid, onOpen]);
 
-  console.log("jobindex is rendered");
   return (
-    <BasicLayout>
+    <>
       {currentUser.role !== "freelancer" && (
         <Button
           px={4}
@@ -159,6 +157,7 @@ export default function App() {
               </Flex>
               <Box mt={2}>
                 <Link
+                  as={ReactRouterLink}
                   fontSize="2xl"
                   color="gray.700"
                   _dark={{ color: "white" }}
@@ -170,7 +169,7 @@ export default function App() {
                     },
                     textDecor: "underline",
                   }}
-                  href={`/job/detail/${job.id}`}
+                  to={`/job/${job.id}`}
                 >
                   {job.title}
                 </Link>
@@ -183,10 +182,11 @@ export default function App() {
 
               <Flex justifyContent="space-between" alignItems="center" mt={4}>
                 <Link
+                  as={ReactRouterLink}
                   color="brand.600"
                   _dark={{ color: "brand.400" }}
                   _hover={{ textDecor: "underline" }}
-                  href={`/job/detail/${job.id}`}
+                  to={`/job/${job.id}`}
                 >
                   Read more
                 </Link>
@@ -203,10 +203,12 @@ export default function App() {
                     alt="avatar"
                   />
                   <Link
+                    as={ReactRouterLink}
                     color="gray.700"
                     _dark={{ color: "gray.200" }}
                     fontWeight="700"
                     cursor="pointer"
+                    to={"#"}
                   >
                     {job.author.name}
                   </Link>
@@ -231,7 +233,7 @@ export default function App() {
                 .unwrap()
                 .then((res) => {
                   toast(res.status);
-                  navigator(`/job/detail/${jobid}`);
+                  navigator(`/job/${jobid}`);
                   onCloseModal();
                 })
                 .catch((error) => {
@@ -296,6 +298,6 @@ export default function App() {
           </Form>
         </Formik>
       </Modal>
-    </BasicLayout>
+    </>
   );
 }

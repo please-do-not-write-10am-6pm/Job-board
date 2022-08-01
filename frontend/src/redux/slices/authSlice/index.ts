@@ -1,3 +1,4 @@
+import { StatNumber } from "@chakra-ui/react";
 import { createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "redux/store";
@@ -18,7 +19,12 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setLogout: (state) => {
+      localStorage.removeItem("token");
+      state.currentUser = {};
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerAction.pending, (state) => {
@@ -63,6 +69,8 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { setLogout } = authSlice.actions;
 
 const currentUser = (state: RootState) => state.auth.currentUser;
 const loading = (state: RootState) => state.auth.loading;

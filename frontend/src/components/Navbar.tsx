@@ -15,9 +15,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as ReactRouterLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { authSelectors } from "redux/slices/authSlice";
+import { authSelectors, setLogout } from "redux/slices/authSlice";
 import { useEffect } from "react";
 import { useAppDispatch } from "redux/store";
 import { getProfileAction } from "redux/slices/userSlice/user.action";
@@ -43,12 +43,13 @@ const NAV_ITEMS: Array<NavItem> = [
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
   const navigator = useNavigate();
+  const dispatch = useAppDispatch();
 
   const logout = () => {
-    Promise.all([localStorage.removeItem("token"), navigator("/login")]);
+    dispatch(setLogout());
+    navigator("/login");
   };
 
-  console.log("nabvar is rendered");
   return (
     <Box>
       <Flex
@@ -148,21 +149,22 @@ const DesktopNav = () => {
 
   useEffect(() => {
     localStorage.getItem("token") && dispatch(getProfileAction());
-  }, []);
+  }, [dispatch]);
 
   const currentUser = useSelector(authSelectors.currentUser);
 
   return (
     <Stack direction={"row"} spacing={4}>
       {localStorage.getItem("token") ? (
-        currentUser.role === "admin" || currentUser === "client" ? (
+        currentUser.role === "admin" || currentUser.role === "client" ? (
           NAV_ITEMS.map((navItem) => (
             <Box key={navItem.label}>
               <Popover trigger={"hover"} placement={"bottom-start"}>
                 <PopoverTrigger>
                   <Link
+                    as={ReactRouterLink}
                     p={2}
-                    href={navItem.href ?? "#"}
+                    to={navItem.href ?? "#"}
                     fontSize={"sm"}
                     fontWeight={500}
                     color={linkColor}
@@ -183,8 +185,9 @@ const DesktopNav = () => {
               <Popover trigger={"hover"} placement={"bottom-start"}>
                 <PopoverTrigger>
                   <Link
+                    as={ReactRouterLink}
                     p={2}
-                    href={navItem.href ?? "#"}
+                    to={navItem.href ?? "#"}
                     fontSize={"sm"}
                     fontWeight={500}
                     color={linkColor}

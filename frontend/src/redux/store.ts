@@ -1,9 +1,6 @@
-import {
-  configureStore,
-  getDefaultMiddleware,
-  combineReducers,
-} from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { createLogger } from "redux-logger";
 
 import userSlice from "./slices/userSlice";
 import jobSlice from "./slices/jobSlice";
@@ -19,8 +16,8 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().prepend([logger]),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(createLogger()),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
