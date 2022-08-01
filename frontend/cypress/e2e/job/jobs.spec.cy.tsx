@@ -46,9 +46,7 @@ describe("jobs page test", () => {
   it("should approve or block a job when click a button", () => {
     cy.get(".css-g3x0wt").within((el) => {
       cy.get(".css-1vdf0dv:first").click();
-      cy.get("button")
-        .contains([value~="aria-lable=Approve:first"])
-        .should("have.css", "css-koy0i7");
+      cy.get(".css-koy0i7:first").click();
     });
   });
 });
