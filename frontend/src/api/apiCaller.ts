@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-toastify";
 
 const BaseUrl: string = "http://192.168.115.130:3000";
 

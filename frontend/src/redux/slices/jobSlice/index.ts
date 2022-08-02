@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { JobObject } from "./job.type";
 import { RootState } from "../../store";
 import {

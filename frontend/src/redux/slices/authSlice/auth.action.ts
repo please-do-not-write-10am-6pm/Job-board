@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
 import { register, login } from "api/apiCaller";
 
 export const registerAction = createAsyncThunk(

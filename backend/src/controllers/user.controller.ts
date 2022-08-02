@@ -195,12 +195,10 @@ export const approveUser = async (
   next: NextFunction
 ) => {
   try {
-    console.log("req.params.id", req.params.id, "req.user.id", req.user.id);
     const user = await prisma.user.update({
       where: { id: +req.params.id },
       data: { isApproved: true },
     });
-    console.log("approveed User", user);
     if (!user) throw createHttpError(404, "User not found");
 
     res.status(200).send({
@@ -218,8 +216,6 @@ export const blockUser = async (
   next: NextFunction
 ) => {
   try {
-    console.log("req.params.id", req.params.id, "req.user.id", req.user.id);
-
     const user = await prisma.user.update({
       where: { id: +req.params.id },
       data: { isApproved: false },

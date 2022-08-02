@@ -6,9 +6,10 @@ import {
   Link,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { authSelectors } from "redux/slices/authSlice";
 import { Link as ReactRouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { authSelectors } from "redux/slices/authSlice";
 
 export default function Footer() {
   const currentUser = useSelector(authSelectors.currentUser);

@@ -4,7 +4,7 @@ import { Stack } from "@chakra-ui/react";
 import WithSubnavigation from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
-export const BasicLayout = ({ children }: any) => {
+export default function BasicLayout({ children }: any) {
   return (
     <>
       <WithSubnavigation />
@@ -16,4 +16,4 @@ export const BasicLayout = ({ children }: any) => {
       <Footer />
     </>
   );
-};
+}

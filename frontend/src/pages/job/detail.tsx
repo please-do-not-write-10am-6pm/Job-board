@@ -20,6 +20,10 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch } from "redux/store";
+import { toast } from "react-toastify";
+import { useDisclosure } from "@chakra-ui/react";
+
 import { bidSelectors } from "redux/slices/bidSlice";
 import {
   getAllBidsOnEachJobAction,
@@ -28,12 +32,8 @@ import {
 } from "redux/slices/bidSlice/bid.action";
 import { jobSelectors } from "redux/slices/jobSlice";
 import { getJobAction } from "redux/slices/jobSlice/job.action";
-import { useAppDispatch } from "redux/store";
-import { toast } from "react-toastify";
-import { useDisclosure } from "@chakra-ui/react";
 
 import { BidSchema } from ".";
-import { BasicLayout } from "pages/__layout/BasicLayout";
 
 export default function JobDetail() {
   const navigator = useNavigate();

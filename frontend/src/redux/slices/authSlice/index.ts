@@ -1,4 +1,3 @@
-import { StatNumber } from "@chakra-ui/react";
 import { createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "redux/store";

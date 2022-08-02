@@ -4,6 +4,7 @@ import { hash, compare } from "bcryptjs";
 
 import prisma from "../prisma";
 import { generateToken } from "../utils/jwt";
+import { create } from "domain";
 
 const ifUserExists = async (email: string) => {
   const user = await prisma.user.findUnique({

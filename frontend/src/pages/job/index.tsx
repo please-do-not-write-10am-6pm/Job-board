@@ -16,16 +16,13 @@ import {
   ModalBody,
   FormLabel,
   ModalFooter,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Stack,
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useAppDispatch } from "redux/store";
-import {
-  approveJobAction,
-  blockJobAction,
-  getAllJobsAction,
-} from "redux/slices/jobSlice/job.action";
-import { useSelector } from "react-redux";
-import { jobSelectors } from "redux/slices/jobSlice";
 import {
   CheckIcon,
   EditIcon,
@@ -33,11 +30,19 @@ import {
   NotAllowedIcon,
 } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import { authSelectors } from "redux/slices/authSlice";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup";
-import { createBidAction } from "redux/slices/bidSlice/bid.action";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+
+import {
+  approveJobAction,
+  blockJobAction,
+  getAllJobsAction,
+} from "redux/slices/jobSlice/job.action";
+import { useSelector } from "react-redux";
+import { jobSelectors } from "redux/slices/jobSlice";
+import { authSelectors } from "redux/slices/authSlice";
+import { createBidAction } from "redux/slices/bidSlice/bid.action";
 
 export const BidSchema = Yup.object().shape({
   content: Yup.string()
@@ -52,6 +57,7 @@ export default function App() {
   const navigator = useNavigate();
   const currentUser = useSelector(authSelectors.currentUser);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const loading = useSelector(jobSelectors.loading);
 
   const onCloseModal = () => {
     setJobId(null);
@@ -71,6 +77,7 @@ export default function App() {
           dispatch(getAllJobsAction());
         })
         .catch((error) => {
+          console.log(error, "error");
           toast.warn(error.message);
         });
   };
@@ -113,29 +120,56 @@ export default function App() {
 
   return (
     <>
+      {/* {loading === "pending" && (
+        <Box padding={"6"} boxShadow="lg" bg="gray.300">
+          <Skeleton startColor="pink.500" endColor="orange.500" height="1120px">
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" />
+          </Skeleton>
+        </Box>
+      )} */}
       {currentUser.role !== "freelancer" && (
-        <Button
-          px={4}
-          mt={"4"}
-          ml={"4"}
-          fontSize={"sm"}
-          rounded={"full"}
-          bg={"blue.400"}
-          color={"white"}
-          boxShadow={
-            "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-          }
-          _hover={{
-            bg: "blue.500",
-          }}
-          _focus={{
-            bg: "blue.500",
-          }}
-          maxW={"15vh"}
-          onClick={goCreateJobPage}
+        <Skeleton
+          height={"100px"}
+          bg="white"
+          fadeDuration={4}
+          isLoaded={loading !== "pending"}
         >
-          Create Job
-        </Button>
+          <Button
+            px={4}
+            mt={"4"}
+            ml={"4"}
+            fontSize={"sm"}
+            rounded={"full"}
+            bg={"blue.400"}
+            color={"white"}
+            boxShadow={
+              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+            }
+            _hover={{
+              bg: "blue.500",
+            }}
+            _focus={{
+              bg: "blue.500",
+            }}
+            maxW={"15vh"}
+            onClick={goCreateJobPage}
+          >
+            Create Job
+          </Button>
+        </Skeleton>
       )}
       {allJobs.map((job, num) => {
         return (

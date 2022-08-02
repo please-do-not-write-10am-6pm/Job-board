@@ -6,7 +6,6 @@ import {
   updateBid,
   deleteBid,
 } from "api/apiCaller";
-import { accessSync } from "fs";
 
 export const getAllBidsOnEachJobAction = createAsyncThunk(
   "getAllBidsOnEachJobAction",

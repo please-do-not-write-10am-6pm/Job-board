@@ -11,6 +11,9 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { CheckIcon, NotAllowedIcon } from "@chakra-ui/icons";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import {
   approveUserAction,
@@ -18,10 +21,7 @@ import {
   getAllUserAction,
 } from "redux/slices/userSlice/user.action";
 import { useAppDispatch } from "redux/store";
-import { useSelector } from "react-redux";
 import { userSelectors } from "redux/slices/userSlice";
-import { toast } from "react-toastify";
-import { CheckIcon, NotAllowedIcon } from "@chakra-ui/icons";
 
 export default function UserPage() {
   const dispatch = useAppDispatch();

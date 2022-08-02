@@ -17,8 +17,9 @@ import {
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useNavigate, Link as ReactRouterLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { authSelectors, setLogout } from "redux/slices/authSlice";
 import { useEffect } from "react";
+
+import { authSelectors, setLogout } from "redux/slices/authSlice";
 import { useAppDispatch } from "redux/store";
 import { getProfileAction } from "redux/slices/userSlice/user.action";
 

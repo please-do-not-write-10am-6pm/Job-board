@@ -8,6 +8,8 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,8 +23,6 @@ import {
   updateJobAction,
 } from "redux/slices/jobSlice/job.action";
 import { authSelectors } from "redux/slices/authSlice";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import { jobSelectors } from "redux/slices/jobSlice";
 
 const JobSchema = Yup.object().shape({

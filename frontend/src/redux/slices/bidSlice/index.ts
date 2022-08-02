@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { BidObject } from "./bid.type";
 import { RootState } from "redux/store";
 import {
